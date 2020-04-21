@@ -2,17 +2,17 @@
   "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
   "version": "2.0",
   "bundles": {
-    "hello-world-web-part": {
+    "dynamic-type-style-web-part": {
       "components": [
         {
-          "entrypoint": "./lib/webparts/helloWorld/HelloWorldWebPart.js",
-          "manifest": "./src/webparts/helloWorld/HelloWorldWebPart.manifest.json"
+          "entrypoint": "./lib/webparts/dynamicTypeStyle/DynamicTypeStyleWebPart.js",
+          "manifest": "./src/webparts/dynamicTypeStyle/DynamicTypeStyleWebPart.manifest.json"
         }
       ]
     }
   },
   "externals": {},
   "localizedResources": {
-    "HelloWorldWebPartStrings": "lib/webparts/helloWorld/loc/{locale}.js"
+    "DynamicTypeStyleWebPartStrings": "lib/webparts/dynamicTypeStyle/loc/{locale}.js"
   }
 }

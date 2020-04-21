@@ -6,22 +6,46 @@ import {
   PropertyPaneTextField
 } from '@microsoft/sp-property-pane';
 import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
+import { ThemeProvider, IReadonlyTheme, ThemeChangedEventArgs } from '@microsoft/sp-component-base';
+import * as strings from 'DynamicTypeStyleWebPartStrings';
+
 import { StylesDemo } from './components/StylesDemo';
+import AppContext from '../../common/AppContext';
 
-import * as strings from 'HelloWorldWebPartStrings';
-
-export interface IHelloWorldWebPartProps {
+export interface IDynamicTypeStyleWebPartProps {
   description: string;
 }
 
-export default class HelloWorldWebPart extends BaseClientSideWebPart <IHelloWorldWebPartProps> {
+export default class DynamicTypeStyleWebPart extends BaseClientSideWebPart<IDynamicTypeStyleWebPartProps> {
+
+  private themeProvider: ThemeProvider;
+  private theme: IReadonlyTheme;
+
+  protected onInit(): Promise<void> {
+    this.themeProvider = this.context.serviceScope.consume(ThemeProvider.serviceKey);
+    this.theme = this.themeProvider.tryGetTheme();
+    this.themeProvider.themeChangedEvent.add(this, this.onThemeChanged);
+
+    return super.onInit();
+  }
 
   public render(): void {
     const element: React.ReactElement = React.createElement(
-      StylesDemo
+      AppContext.Provider,
+      {
+        value: {
+          theme: { ...this.theme }
+        }
+      },
+      React.createElement(StylesDemo)
     );
 
     ReactDom.render(element, this.domElement);
+  }
+
+  private onThemeChanged(args: ThemeChangedEventArgs) {
+    this.theme = args.theme;
+    this.render();
   }
 
   protected onDispose(): void {
