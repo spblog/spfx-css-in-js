@@ -24,7 +24,7 @@ export default class DynamicTypeStyleWebPart extends BaseClientSideWebPart<IDyna
   protected onInit(): Promise<void> {
     this.themeProvider = this.context.serviceScope.consume(ThemeProvider.serviceKey);
     this.theme = this.themeProvider.tryGetTheme();
-    this.themeProvider.themeChangedEvent.add(this, this.onThemeChanged);
+    this.themeProvider.themeChangedEvent.add(this, this.whenThemeChanged);
 
     return super.onInit();
   }
@@ -43,7 +43,7 @@ export default class DynamicTypeStyleWebPart extends BaseClientSideWebPart<IDyna
     ReactDom.render(element, this.domElement);
   }
 
-  private onThemeChanged(args: ThemeChangedEventArgs) {
+  private whenThemeChanged(args: ThemeChangedEventArgs) {
     this.theme = args.theme;
     this.render();
   }
