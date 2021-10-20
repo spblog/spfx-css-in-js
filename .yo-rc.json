@@ -1,10 +1,10 @@
 {
   "@microsoft/generator-sharepoint": {
-    "isCreatingSolution": false,
+    "isCreatingSolution": true,
     "environment": "spo",
-    "version": "1.10.0",
+    "version": "1.12.1",
     "libraryName": "spfx-css-in-js",
-    "libraryId": "d07a3ba7-a2e7-41df-b2e6-acaf2ed00a33",
+    "libraryId": "ae4409ca-d854-4aea-8274-95b195b88fed",
     "packageManager": "npm",
     "isDomainIsolated": false,
     "componentType": "webpart"
